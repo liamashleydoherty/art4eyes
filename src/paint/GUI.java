@@ -80,6 +80,13 @@ public class GUI
 	 * 		- Cut Ctrl + X
 	 * 		- Copy Ctrl + C
 	 * 		- Paste Ctrl + V
+	 * 		-----------
+	 * 		- Rotate Right
+	 * 		- Rotate Left
+	 * 		- Flip Vertical
+	 * 		- Flip Horizontal
+	 * FX	- Black & White
+	 * 		- Invert
 	 * Help	- About
 	 * @return
 	 */
@@ -90,6 +97,7 @@ public class GUI
 		
 		//File Menu
 		JMenu file = new JMenu("File");
+		file.setMnemonic(KeyEvent.VK_F);
 		/*New*/
 		JMenuItem neW = new JMenuItem("New", 0);
 		neW.setMnemonic(KeyEvent.VK_N);
@@ -158,6 +166,7 @@ public class GUI
 		
 		//Edit Menu
 		JMenu edit = new JMenu("Edit");
+		edit.setMnemonic(KeyEvent.VK_D);
 		/*Undo*/
 		JMenuItem undo = new JMenuItem("Undo", 0);
 		undo.setMnemonic(KeyEvent.VK_U);
@@ -222,9 +231,96 @@ public class GUI
 			}
 		});
 		edit.add(paste);
+		edit.addSeparator();
+		/*Rotate right*/
+		JMenuItem rotateRight = new JMenuItem("Rotate Right", 5);
+		rotateRight.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				mainMenu.editRotateRight(buffer, canvas);
+			}
+		});
+		edit.add(rotateRight);
+		/*Rotate left*/
+		JMenuItem rotateLeft = new JMenuItem("Rotate Left", 6);
+		rotateLeft.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				mainMenu.editRotateLeft(buffer, canvas);
+			}
+		});
+		edit.add(rotateLeft);
+		/*Flip vertical*/
+		JMenuItem flipVertical = new JMenuItem("Flip Vertical", 7);
+		flipVertical.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				mainMenu.editFlipVertical(buffer, canvas);
+			}
+		});
+		edit.add(flipVertical);
+		/*Flip Horizontal*/
+		JMenuItem flipHorizontal = new JMenuItem("Flip Horizontal", 8);
+		flipHorizontal.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				mainMenu.editFlipHorizontal(buffer, canvas);
+			}
+		});
+		//Effects Menu
+		JMenu fx = new JMenu("FX");
+		fx.setMnemonic(KeyEvent.VK_X);
+		/*Black & White*/
+		JMenuItem blackWhite = new JMenuItem("Black & White", 0);
+		blackWhite.setMnemonic(KeyEvent.VK_B);
+		blackWhite.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B, ActionEvent.CTRL_MASK));
+		blackWhite.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				mainMenu.effectsBlackWhite(buffer, canvas);
+			}
+		});
+		fx.add(blackWhite);
+		/*Grey Scale*/
+		JMenuItem greyScale = new JMenuItem("Grey Scale", 1);
+		greyScale.setMnemonic(KeyEvent.VK_G);
+		greyScale.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, ActionEvent.CTRL_MASK));
+		greyScale.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				mainMenu.effectsGreyScale(buffer, canvas);
+			}
+		});
+		fx.add(greyScale);
+		/*Invert*/
+		JMenuItem invert = new JMenuItem("Invert", 2);
+		invert.setMnemonic(KeyEvent.VK_I);
+		invert.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I, ActionEvent.CTRL_MASK));
+		invert.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				mainMenu.effectsInvert(buffer, canvas);
+			}
+		});
+		fx.add(invert);
 		
 		//Help Menu
 		JMenu help = new JMenu("Help");
+		help.setMnemonic(KeyEvent.VK_H);
 		/*About*/
 		JMenuItem about = new JMenuItem("About", 0);
 		about.setMnemonic(KeyEvent.VK_A);
@@ -240,6 +336,7 @@ public class GUI
 		
 		main.add(file);
 		main.add(edit);
+		main.add(fx);
 		main.add(help);
 		return main;
 	}

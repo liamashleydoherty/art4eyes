@@ -1,8 +1,8 @@
 package paint;
 
+import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 
@@ -101,6 +101,82 @@ public class MainMenu
 	public void editPaste()
 	{
 		
+	}
+	
+	public void editRotateRight(ImageBuffer buffer, Canvas canvas)
+	{
+		
+	}
+	
+	public void editRotateLeft(ImageBuffer buffer, Canvas canvas)
+	{
+		
+	}
+	
+	public void editFlipVertical(ImageBuffer buffer, Canvas canvas)
+	{
+		
+	}
+	
+	public void editFlipHorizontal(ImageBuffer buffer, Canvas canvas)
+	{
+		
+	}
+	
+	public void effectsBlackWhite(ImageBuffer buffer, Canvas canvas)
+	{
+		for(int x=0;x<buffer.getCurrentImage().getWidth();x++)
+		{
+			for(int y=0;y<buffer.getCurrentImage().getHeight();y++)
+			{
+				int rgb = buffer.getCurrentImage().getRGB(x, y);
+				Color col = new Color(rgb, true);
+				int MONO = 368;
+				if(col.getRed() + col.getGreen() + col.getBlue() > MONO)
+				{
+					col = new Color(255, 255, 255);
+				}else{
+					col = new Color(0, 0, 0);
+				}
+				buffer.getCurrentImage().setRGB(x, y, col.getRGB());
+			}
+		}
+		buffer.setNewImage(canvas.render());
+		canvas.repaint();
+	}
+	
+	public void effectsGreyScale(ImageBuffer buffer, Canvas canvas)
+	{
+		for(int x=0;x<buffer.getCurrentImage().getWidth();x++)
+		{
+			for(int y=0;y<buffer.getCurrentImage().getHeight();y++)
+			{
+				int rgb = buffer.getCurrentImage().getRGB(x, y);
+				Color col = new Color(rgb, true);
+				col = new Color((col.getRed() + col.getGreen() + col.getBlue())/3, true);
+				buffer.getCurrentImage().setRGB(x, y, col.getRGB());
+			}
+		}
+		buffer.setNewImage(canvas.render());
+		canvas.repaint();
+	}
+	
+	public void effectsInvert(ImageBuffer buffer, Canvas canvas)
+	{
+		for(int x=0;x<buffer.getCurrentImage().getWidth();x++)
+		{
+			for(int y=0;y<buffer.getCurrentImage().getHeight();y++)
+			{
+				int rgb = buffer.getCurrentImage().getRGB(x, y);
+				Color col = new Color(rgb, true);
+				col = new Color(255 - col.getRed(), 
+								255 - col.getGreen(), 
+								255 - col.getBlue());
+				buffer.getCurrentImage().setRGB(x, y, col.getRGB());
+			}
+		}
+		buffer.setNewImage(canvas.render());
+		canvas.repaint();
 	}
 	
 	public void helpAbout()

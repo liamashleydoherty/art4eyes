@@ -100,7 +100,7 @@ public class Canvas extends JPanel
 		}
 	}
 	
-	private BufferedImage render()
+	public BufferedImage render()
 	{
         // Create BufferedImage of JPanel
         BufferedImage bi = new BufferedImage(this.getWidth(), 
